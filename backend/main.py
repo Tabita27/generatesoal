@@ -3,14 +3,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-
 from routes import upload, generate, export
 
 app = FastAPI(
     title="SoalAdaptif ID API",
     description="Automatic Question Generation untuk Bahasa Indonesia",
     version="1.0.0"
+)
+app.mount(
+    "/static",
+    StaticFiles(directory="../frontend/static"),
+    name="static"
 )
 
 app.add_middleware(
@@ -29,7 +35,4 @@ app.include_router(export.router, prefix="/api/export", tags=["Export"])
 # Health Check
 @app.get("/")
 async def root():
-    return {
-        "message": "SoalAdaptif ID API Running",
-        "docs": "/docs"
-    }
+    return FileResponse("../frontend/index.html")
