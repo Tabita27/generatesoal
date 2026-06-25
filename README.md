@@ -1,4 +1,4 @@
 Cara ngerun projek
- masuk ke folder backend 
- .\venv\Scripts\Activate.ps1
- uvicorn main:app --reload
+ 1. masuk ke folder backend 
+ 2. .\venv\Scripts\Activate.ps1
+ 3. uvicorn main:app --reload
